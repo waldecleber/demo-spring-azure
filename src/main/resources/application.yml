@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dcbps111pr001.e-unicred.com.br:5432/unicred_pg
+    url: jdbc:postgresql://<<host>>:5432/unicred_pg
     driver-class-name: org.postgresql.Driver
-    username: svc.css-arquivo-tst
-    password: 5Y2U!AoXL*
+    username: <<user>>
+    password: <<senha>>
   flyway:
     baseline-on-migrate: true
   jpa:
