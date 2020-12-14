@@ -1,9 +1,25 @@
 server:
   port: 7001
+
+spring:
+  datasource:
+    url: jdbc:postgresql://dcbps111pr001.e-unicred.com.br:5432/unicred_pg
+    driver-class-name: org.postgresql.Driver
+    username: svc.css-arquivo-tst
+    password: 5Y2U!AoXL*
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
 info:
   app:
-    name: Spring Demo Azure Pipeline
-    description: Aplicação para demonstração de deploy no Azure
+    name: Spring Sample Application
+    description: This is my first spring boot application
     version: 1.0.0
 
 
