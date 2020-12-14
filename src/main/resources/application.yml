@@ -18,8 +18,8 @@ spring:
 
 info:
   app:
-    name: Spring Sample Application
-    description: This is my first spring boot application
+    name: Deploy Azure Pipelines
+    description: Aplicação para demonstrar deploy Azure Pipeline
     version: 1.0.0
 
 
