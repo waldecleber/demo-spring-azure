@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'application'
+	id 'maven-publish'
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+}
+
+group = 'com.waldecleber'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+ext {
+	set('springBootAdminVersion', "2.3.1")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-actuator:2.4.0'
+	implementation 'org.flywaydb:flyway-core:5.2.4'
+	implementation 'org.modelmapper:modelmapper:2.3.0'
+	implementation 'commons-io:commons-io:2.5'
+	implementation 'org.mockito:mockito-all:1.10.19'
+	implementation 'junit:junit:4.12'
+	runtime "org.postgresql:postgresql:42.1.4"
+	compile('io.micrometer:micrometer-registry-prometheus')
+
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
+	components {
+		withModule('org.springframework:spring-beans') {
+			allVariants {
+				withDependencyConstraints {
+					// Need to patch constraints because snakeyaml is an optional dependency
+					it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
+				}
+			}
+		}
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+	}
+}
+
+repositories {
+	mavenCentral()
+}
