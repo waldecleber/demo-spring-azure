@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -34,57 +37,30 @@ public class ClientesServiceTest {
 		mapper = mock(ModelMapper.class);
 		clienteService = new ClienteService(clienteRepository, mapper);
 	}
-	
+
 	@Test
-	public void deveSalvarNovoClienteSucesso() {
+	public void listarTodosClientes() {
 		//given (cenario)
-		Cliente cliente = Cliente.builder()
+		ClienteDTO cliente = ClienteDTO.builder()
 				.nome("Cliente 01")
 				.telefone("9999-0000")
 				.email("cliente@teste.com")
 				.cpf("17482812164")
 				.build();
-		
+
 		ClienteDTO dto =
 				ClienteDTO.builder()
-				.nome("Cliente 01")
-				.telefone("9999-0000")
-				.email("cliente@teste.com")
-				.cpf("17482812164")
-				.build();
-
-		when(clienteRepository.save(cliente)).thenReturn(cliente);
-		when(clienteRepository.findByCpf(any())).thenReturn(Optional.ofNullable(null));
-		when(mapper.map(cliente, ClienteDTO.class)).thenReturn(dto);
-
-		//action
-		clienteService.salvar(dto);
-		
-		//assert
-		error.checkThat(dto.getNome(), is(equalTo(cliente.getNome())));
-	}
-	
-	@Test(expected = ClienteDuplicadoException.class)
-	public void naoDeveSalvarClienteDuplicado() {
-		Cliente cliente = Cliente.builder()
-				.nome("Cliente 01")
-				.telefone("9999-0000")
-				.email("cliente@teste.com")
-				.cpf("17482812164")
-				.build();
-
-		ClienteDTO dto = ClienteDTO.builder()
 						.nome("Cliente 01")
 						.telefone("9999-0000")
 						.email("cliente@teste.com")
 						.cpf("17482812164")
 						.build();
-		
-		when(clienteRepository.findByCpf("17482812164")).thenReturn(Optional.of(cliente));
-		when(clienteRepository.save(cliente)).thenReturn(cliente);
-		
-		clienteService.salvar(dto);
-				
+
+		//action
+		List<ClienteDTO> clientes = clienteService.listarClientes();
+
+		//assert
+		error.checkThat(clientes.size(), is(1));
 	}
 
 }
