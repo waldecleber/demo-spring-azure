@@ -4,14 +4,10 @@ import java.util.Objects;
 
 public class ClienteDTO {
 	
-private Long id;
-	
+    private Long id;
 	private String nome;
-	
 	private String telefone;
-	
 	private String email;
-
 	private String cpf;
 	
 	public ClienteDTO() {

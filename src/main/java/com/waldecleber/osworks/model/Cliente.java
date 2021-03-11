@@ -1,24 +1,14 @@
 package com.waldecleber.osworks.model;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "demo_cliente", schema = "public")
 public class Cliente {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String nome;
-	
 	private String telefone;
-	
 	private String email;
-
 	private String cpf;
-	
 	
 	public Cliente() {
 		super();

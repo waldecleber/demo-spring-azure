@@ -1,27 +1,11 @@
 server:
   port: 7001
 
-spring:
-  datasource:
-    url: jdbc:postgresql://<<host>>:5432/unicred_pg
-    driver-class-name: org.postgresql.Driver
-    username: <<user>>
-    password: <<senha>>
-  flyway:
-    baseline-on-migrate: true
-  jpa:
-    properties:
-      hibernate:
-        temp:
-          use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
 info:
   app:
     name: Deploy Azure Pipelines
     description: Aplicação para demonstrar deploy Azure Pipeline
     version: 1.0.0
-
 
 management:
   endpoints:
@@ -29,15 +13,11 @@ management:
     web:
       base-path: /management
       exposure:
-        include: health, info, prometheus, env, flyway
+        include: health, info, env
   endpoint:
     health:
       enabled: true
     info:
       enabled: true
     env:
-      enabled: true
-    prometheus:
-      enabled: true
-    flyway:
       enabled: true
